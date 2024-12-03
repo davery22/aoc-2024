@@ -19,7 +19,7 @@ public class Main {
                 // Un-discoverable reflective shenanigans
                 clazz = Class.forName(FMT."advent.of.code.days.Day%02d\{i}");
             } catch (ClassNotFoundException e) {
-                break;
+                return;
             }
             Day day = (Day) clazz.getConstructors()[0].newInstance();
             try (AdventIO io = new AdventIO(FMT."/day%02d\{i}.txt")) {
@@ -29,6 +29,7 @@ public class Main {
                 day.part2(io);
             }
         }
+        System.out.println("Merry Christmas!");
     }
     
     static class AdventIO implements IO, AutoCloseable {
