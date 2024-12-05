@@ -10,5 +10,6 @@ public interface IO {
     Scanner scanner();
     PrintStream out();
     
+    // End-of-line pattern
     Pattern EOL = Pattern.compile("\r\n|[\n\r\u2028\u2029\u0085]");
 }

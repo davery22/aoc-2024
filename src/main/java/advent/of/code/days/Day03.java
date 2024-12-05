@@ -13,7 +13,7 @@ public class Day03 implements Day {
         long sum = io.scanner().findAll(MUL_PATTERN)
             .mapToLong(match -> Long.parseLong(match.group(1)) * Long.parseLong(match.group(2)))
             .sum();
-        System.out.println(sum);
+        io.out().println(sum);
     }
     
     @Override
@@ -27,6 +27,6 @@ public class Day03 implements Day {
                 default -> state.enabled ? Long.parseLong(match.group(1)) * Long.parseLong(match.group(2)) : 0;
             })
             .sum();
-        System.out.println(sum);
+        io.out().println(sum);
     }
 }

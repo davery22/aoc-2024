@@ -23,7 +23,7 @@ public class Day04 implements Day {
                 }
             }
         }
-        System.out.println(count);
+        io.out().println(count);
     }
     
     boolean check(int[][] grid, int y0, int x0, int dy, int dx) {
@@ -60,7 +60,7 @@ public class Day04 implements Day {
                 }
             }
         }
-        System.out.println(count);
+        io.out().println(count);
     }
     
     int score(int ch) {
