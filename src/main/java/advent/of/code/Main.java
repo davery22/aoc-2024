@@ -15,6 +15,7 @@ import static java.util.FormatProcessor.FMT;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+        String red = "31", green = "32";
         for (int i = 1; i <= 25; i++) {
             Class<?> clazz;
             try {
@@ -23,6 +24,7 @@ public class Main {
             } catch (ClassNotFoundException e) {
                 return;
             }
+            System.out.println(STR."\033[\{i % 2 == 0 ? red : green}mOn the \{i}\{suffix(i)} day of Christmas...\033[0m");
             Day day = (Day) clazz.getConstructors()[0].newInstance();
             try (AdventIO io = new AdventIO(FMT."/day%02d\{i}.txt")) {
                 time(() -> day.part1(io));
@@ -31,7 +33,7 @@ public class Main {
                 time(() -> day.part2(io));
             }
         }
-        System.out.println("Merry Christmas!");
+        System.out.println("\033[33mMerry Christmas!\033[0m");
     }
     
     static void time(Runnable r) {
@@ -39,6 +41,15 @@ public class Main {
         r.run();
         Instant end = Instant.now();
         System.out.println(STR."\033[37m--- \{Duration.between(start, end)} ---\033[0m");
+    }
+    
+    static String suffix(int i) {
+        return switch (i) {
+            case 1 -> "st";
+            case 2 -> "nd";
+            case 3 -> "rd";
+            default -> "th";
+        };
     }
     
     static class AdventIO implements IO, AutoCloseable {
