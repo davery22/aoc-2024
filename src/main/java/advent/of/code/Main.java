@@ -6,6 +6,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -23,13 +25,20 @@ public class Main {
             }
             Day day = (Day) clazz.getConstructors()[0].newInstance();
             try (AdventIO io = new AdventIO(FMT."/day%02d\{i}.txt")) {
-                day.part1(io);
+                time(() -> day.part1(io));
             }
             try (AdventIO io = new AdventIO(FMT."/day%02d\{i}.txt")) {
-                day.part2(io);
+                time(() -> day.part2(io));
             }
         }
         System.out.println("Merry Christmas!");
+    }
+    
+    static void time(Runnable r) {
+        Instant start = Instant.now();
+        r.run();
+        Instant end = Instant.now();
+        System.out.println(STR."\033[37m--- \{Duration.between(start, end)} ---\033[0m");
     }
     
     static class AdventIO implements IO, AutoCloseable {
