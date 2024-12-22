@@ -44,7 +44,7 @@ public class Main {
     }
     
     static String suffix(int i) {
-        return switch (i) {
+        return (i/10%10 == 1) ? "th" : switch (i%10) {
             case 1 -> "st";
             case 2 -> "nd";
             case 3 -> "rd";
