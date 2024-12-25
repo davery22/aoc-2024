@@ -15,17 +15,15 @@ import static java.util.FormatProcessor.FMT;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        String red = "31", green = "32";
         for (int i = 1; i <= 25; i++) {
-            Class<?> clazz;
+            Day day;
             try {
                 // Un-discoverable reflective shenanigans
-                clazz = Class.forName(FMT."advent.of.code.days.Day%02d\{i}");
+                day = (Day) Class.forName(FMT."advent.of.code.days.Day%02d\{i}").getConstructors()[0].newInstance();
             } catch (ClassNotFoundException e) {
                 return;
             }
-            System.out.println(STR."\033[\{i % 2 == 0 ? red : green}mOn the \{i}\{suffix(i)} day of Christmas...\033[0m");
-            Day day = (Day) clazz.getConstructors()[0].newInstance();
+            System.out.println(STR."\033[3\{i%2+1}mOn the \{i}\{suffix(i)} day of Christmas...\033[0m");
             try (AdventIO io = new AdventIO(FMT."/day%02d\{i}.txt")) {
                 time(() -> day.part1(io));
             }
